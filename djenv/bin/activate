@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/lion/app/django/djenv"
+VIRTUAL_ENV="/home/lion2/DevOps/djenv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
