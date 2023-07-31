@@ -7,7 +7,12 @@ git pull
 
 # venv 
 echo "start to activate venv"
-source /djenv/bin/activate
+# For Window user
+if [ -d "djenv/Script" ]; then
+    source djenv/Script/activate
+else
+    source djenv/bin/activate
+if
 
 #runserver
 echo "runserver"
