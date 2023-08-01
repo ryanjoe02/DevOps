@@ -12,7 +12,7 @@ if [ -d "djenv/Script" ]; then
     source djenv/Script/activate
 else
     source djenv/bin/activate
-if
+fi
 
 #runserver
 echo "runserver"
