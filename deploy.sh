@@ -1,6 +1,6 @@
 # git clone
 echo "start to clone"
-git clone https://github.com/teacherSsamko/lion_django_app.git DevOps
+git clone https://github.com/ryanjoe02/DevOps.git DevOps
 cd DevOps
 
 # venv 설치
