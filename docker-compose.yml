@@ -10,9 +10,14 @@ services:
     image: lion-app:0.7
     ports:
       - "8000:8000"
+    volumes:
+      #- ./sampleapp:/app
+      - static_vol:/var/www/html/static/
 
   nginx:
     #nginx
+    depends_on:
+      - lion-app
     container_name: lion-nginx-dc
     build:
       context: .
@@ -20,5 +25,8 @@ services:
     image: lion-nginx
     ports:
       - "8888:80"
-    depends_on:
-      - lion-app
+    volumes:
+      - static_vol:/var/www/html/static/
+
+volumes:
+  static_vol:
