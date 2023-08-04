@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# To start server 
+python manage.py migrate
+gunicorn gunicorn sampleapp.wsgi:application --config sampleapp/gunicorn_config.py
+

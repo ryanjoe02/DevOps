@@ -1,21 +1,21 @@
 version: "3"
 
 services:
-  #django
   lion-app:
     container_name: lion-app-dc
     build:
-      context: sampleapp
+      context: lion_app
       dockerfile: Dockerfile
-    image: lion-app:0.7
+    image: lion-app
     ports:
-      - "8000:8000"
+      - 8000:8000
     volumes:
-      #- ./sampleapp:/app
-      - static_vol:/var/www/html/static/
+      - ./lion_app:/app
+      - "staticfiles:/var/www/html/static"
+    command:
+      - "/start"
 
   nginx:
-    #nginx
     depends_on:
       - lion-app
     container_name: lion-nginx-dc
@@ -26,7 +26,7 @@ services:
     ports:
       - "8888:80"
     volumes:
-      - static_vol:/var/www/html/static/
+      - "staticfiles:/var/www/html/static"
 
 volumes:
-  static_vol:
+  staticfiles:
