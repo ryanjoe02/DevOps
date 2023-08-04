@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     "localhost",
+    "175.106.96.35",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
@@ -45,10 +46,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-## Third party Apps
+# Third party Apps
 INSTALLED_APPS += []
 
-## Created Apps
+# Created Apps
 INSTALLED_APPS += [
     'Forum',
 ]
