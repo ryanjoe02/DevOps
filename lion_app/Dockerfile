@@ -14,7 +14,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . ${APP_HOME}
 
-COPY ./scripts/start ./start
+COPY ./scripts/start /start
 RUN sed -i 's/\r$//g' /start
 RUN chmod +x /start
 
