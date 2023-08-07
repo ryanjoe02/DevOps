@@ -20,7 +20,7 @@ RUN chmod +x /start
 
 WORKDIR ${APP_HOME}
 
-RUN if [-e /var/www/html/static ]; then rm -rf /var/www/html/static; fi
+RUN if [ -e /var/www/html/static ]; then rm -rf /var/www/html/static; fi
 RUN python manage.py collectstatic -c
 
 CMD [ "python", "--version" ]
