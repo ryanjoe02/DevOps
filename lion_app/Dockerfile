@@ -18,6 +18,10 @@ COPY ./scripts/start /start
 RUN sed -i 's/\r$//g' /start
 RUN chmod +x /start
 
+COPY ./scripts/entrypoint /entrypoint
+RUN sed -i 's/\r$//g' /start
+RUN chmod +x /start
+
 WORKDIR ${APP_HOME}
 
 RUN if [ -e /var/www/html/static ]; then rm -rf /var/www/html/static; fi
