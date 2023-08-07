@@ -17,7 +17,7 @@ RUN echo "server {\n\
 		proxy_set_header Host $host;\n\
 		proxy_set_header X-Real-IP $remote_addr;\n\
 	}\n\
-}" >> /etc/nginx/sites-available/django
+}" > /etc/nginx/sites-available/django
 RUN ln -s /etc/nginx/sites-available/django /etc/nginx/sites-enabled/django
 
 WORKDIR /etc/nginx
