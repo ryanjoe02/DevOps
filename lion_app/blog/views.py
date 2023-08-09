@@ -5,8 +5,8 @@ from rest_framework import status
 
 from .serializers import BlogSerializer
 
-
-client = MongoClient(host="mongo")
+MONGO_HOST = os.getenv("MONGO_HOST", "mongo")
+client = MongoClient(host=MONGO_HOST)
 db = client.likelion
 
 
