@@ -59,7 +59,6 @@ INSTALLED_APPS += [
 # Created Apps
 INSTALLED_APPS += [
     'Forum',
-    'blog',
 ]
 
 MIDDLEWARE = [
