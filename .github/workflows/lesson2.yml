@@ -21,4 +21,4 @@ jobs:
                 script: |
                     cd DevOps
                     git pull
-                    docker-compose -f docker-compose.prod.yml restart lion-app
+                    docker-compose -f docker-compose.prod.yml restart lion_app
