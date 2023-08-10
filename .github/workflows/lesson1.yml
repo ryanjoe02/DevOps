@@ -31,7 +31,11 @@ jobs:
                 name: lion-app
                 path: /tmp/lion_app.tar
             - name: docker images
-              run: docker images lion-app
+              if: ${{ always() }} 
+              run: |
+                docker load --input /tmp/lion_app.tar
+                docker images lion-app
+
             
     docker-images:
         if: ${{ always() }}
