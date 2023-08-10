@@ -26,7 +26,7 @@ jobs:
               run: docker images lion-app
             -
                 name: Upload artifact
-                uses: actions/upload-artifact@v3
+                uses: actions/upload-artifact@v2
                 with:
                   name: myimage
                   path: /tmp/lion-app
@@ -41,7 +41,11 @@ jobs:
               run: docker images lion-app
             -
               name: Download artifact
-              uses: actions/download-artifact@v3
+              uses: actions/download-artifact@v2
               with:
                 name: myimage
                 path: /tmp
+            - name: Load Docker image
+              run: docker load -i /tmp/lion-app
+            - name: Run docker images
+              run: docker images lion-app
