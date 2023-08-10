@@ -1,32 +1,32 @@
 name: lesson1
 
 on:
-  push:
-  pull_request:
+    push:
+    pull_request:
 
 jobs:
-  echo-event:
-    name: echo event
-    runs-on: ubuntu-latest
-    steps:
-      - name: get event
-        run: echo "This event is ${{github.event_name}}"
+    echo-event:
+        name: echo event
+        runs-on: ubuntu-latest
+        steps:
+            - name: get event
+              run: echo "This event is ${{github.event_name}}"
 
-  docker-build:
-    name: docker build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: build
-        working-directory: lion_app
-        run: |
-          docker build --tag lion-app .
-      - name: docker images
-        run: docker images lion-app
+    docker-build:
+        name: docker build
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - name: build
+              working-directory: lion_app
+              run: |
+                docker build --tag lion-app .
 
-  docker-images:
-    name: docker images
-    runs-on: ubuntu-latest
-    steps:
-      - name: docker images
-        run: docker images lion-app
+    docker-images:
+        if: ${{ always() }}
+        needs: docker-build
+        name: docker images
+        runs-on: ubuntu-latest
+        steps:
+            - name: docker images
+              run: docker images lion-app
