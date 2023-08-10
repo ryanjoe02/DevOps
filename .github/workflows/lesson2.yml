@@ -1,0 +1,23 @@
+name: Deploy to SSH Server
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    deployment:
+        name: Deploy to Server
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v3
+            - name: git pull via SSH
+              uses: appleboy/ssh-action@v1.0.0
+              with:
+                host: ${{ secrets.HOST }}
+                username: ${{ secrets.USERNAME }}
+                password: ${{ secrets.PASSWORD }}
+                script: |
+                    cd DevOps
+                    git pull
