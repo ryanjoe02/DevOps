@@ -12,8 +12,8 @@ jobs:
       - name: get event
         run: echo "This event is ${{github.event_name}}"
 
-  docker-compose-build:
-    name: docker compose build
+  docker-build:
+    name: docker build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -21,5 +21,12 @@ jobs:
         working-directory: lion_app
         run: |
           docker build --tag lion-app .
+      - name: docker images
+        run: docker images lion-app
+
+  docker-images:
+    name: docker images
+    runs-on: ubuntu-latest
+    steps:
       - name: docker images
         run: docker images lion-app
