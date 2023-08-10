@@ -37,8 +37,6 @@ jobs:
         name: docker images
         runs-on: ubuntu-latest
         steps:
-            - name: docker images
-              run: docker images lion-app
             -
               name: Download artifact
               uses: actions/download-artifact@v2
