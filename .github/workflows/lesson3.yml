@@ -54,8 +54,8 @@ jobs:
                     -p ${{ secrets.NCP_SECRET_KEY }}
                     docker pull ${{ env.IMAGE_TAG }}
                     docker-compose -f docker-compose.prod.yml up -d
-                    docker-compose -f docker-compose.prod.yml stop lion-app \ 
-                    && docker docker-compose -f docker-compose.prod.yml rm --force lion-app
+                    docker-compose -f docker-compose.prod.yml stop lion-app
+                    docker docker-compose -f docker-compose.prod.yml rm lion-app
                     docker run -p 8000:8000 -d \
                     --name lion-app \
                     --env-file .envs/prod/django \
