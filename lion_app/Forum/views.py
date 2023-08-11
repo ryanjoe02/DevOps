@@ -5,16 +5,17 @@ from .models import Topic, Post
 from .serializers import TopicSerializer, PostSerializer
 
 
-@extend_schema(tags=["Topics"])
+@extend_schema(tags=["Topic"])
 class TopicViewSet(viewsets.ModelViewSet):
     queryset = Topic.objects.all()
     serializer_class = TopicSerializer
-    
-    @extend_schema(summary="Create a new topic")
+
+    @extend_schema(summary="Create a New Topic")
     def create(self, request, *args, **kwargs):
         return super().create(request, *args, **kwargs)
 
-@extend_schema(tags=["Post", "Forum"])
-class PostViewSet(viewsets.ModelViewset):
+
+@extend_schema(tags=["Post"])
+class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
