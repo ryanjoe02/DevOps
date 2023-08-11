@@ -10,7 +10,6 @@ services:
     ports:
       - 8000:8000
     volumes:
-      - ./lion_app:/app
       - "staticfiles:/var/www/html/static"
     command:
       - "/start"
