@@ -6,6 +6,7 @@ on:
             - 'main'
 
 env:
+    IMAGE: ${{ vars.NCP_REGISTRY }}/lion-app
     IMAGE_TAG: ${{ vars.NCP_REGISTRY }}/lion-app:latest
 
 jobs:
@@ -22,11 +23,15 @@ jobs:
                 registry: ${{ vars.NCP_REGISTRY }}
                 username: ${{ secrets.NCP_ACCESS_KEY_ID }}
                 password: ${{ secrets.NCP_SECRET_KEY }}
+            
+            - name: Get current timestamp
+              id: timestamp
+              run: echo "timestamp=$(date '+%s')" >> "$GITHUB_OUTPUT"
             - name: Build and Push
               uses: docker/build-push-action@v4
               with:
                 context: lion_app
-                tags: ${{ env.IMAGE_TAG }}, 
+                tags: ${{ env.IMAGE_TAG }},"${{ env.IMAGE }}:${{ steps.timestamp.outputs.timestamp}}"
                 push: true
 
     deployment:
