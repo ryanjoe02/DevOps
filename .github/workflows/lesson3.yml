@@ -26,4 +26,20 @@ jobs:
                 context: lion_app
                 tags: ${{ vars.NCP_REGISTRY }}/lion-app:latest
                 push: true
+    
     # Pull Image From NCR / Run new container with new image
+    deployment:
+        name: Deploy to Server
+        runs-on: ubuntu-latest
+        
+        steps:
+            - uses: actions/checkout@v3
+            - name: pull and run the image
+              uses: appleboy/ssh-action@v1.0.0
+              with:
+                host: ${{ secrets.HOST }}
+                username: ${{ secrets.USERNAME }}
+                password: ${{ secrets.PASSWORD }}
+                script: |
+                    docker pull ${{ vars.NCP_REGISTRY }}/lion-app:latest
+                    docker-compose -f docker-compose.prod.yml build lion-app02
