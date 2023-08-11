@@ -5,6 +5,10 @@ on:
         branches:
             - 'main'
 
+# env variable
+env: 
+    IMAGE_TAG: ${{ vars.NCP_REGISTRY }}/lion-app:latest
+
 jobs:
     # Build Image / Push Image to NCR
     build-and-push:
@@ -24,7 +28,7 @@ jobs:
               uses: docker/build-push-action@v4
               with:
                 context: lion_app
-                tags: ${{ vars.NCP_REGISTRY }}/lion-app:latest
+                tags: ${{ env.IMAGE_TAG }}
                 push: true
     
     # Pull Image From NCR / Run new container with new image
@@ -42,6 +46,9 @@ jobs:
                 password: ${{ secrets.PASSWORD }}
                 script: |
                     cd DevOps
-                    docker login
-                    docker pull ${{ vars.NCP_REGISTRY }}/lion-app:1.1
+                    docker login \
+                    ${{ vars.NCP_REGISTRY }} \
+                    -u ${{ secrets.NCP_ACCESS_KEY_ID }} \
+                    -p ${{ secrets.NCP_SECRET_KEY }}
+                    docker pull ${{ env.IMAGE_TAG }}
                     docker-compose -f docker-compose.prod.yml up -d
