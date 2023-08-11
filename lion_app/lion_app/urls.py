@@ -1,11 +1,11 @@
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 from blog.urls import router as blog_router
 from Forum.urls import router as forum_router
-
-
 
 
 urlpatterns = [
@@ -18,5 +18,6 @@ urlpatterns = [
     path(
         'api/docs/', 
         SpectacularSwaggerView.as_view(url_name='api-schema'), 
-        name='api-swappger-ui'),
-]
+        name='api-swappger-ui',
+    ),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
