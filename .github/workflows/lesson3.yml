@@ -41,5 +41,7 @@ jobs:
                 username: ${{ secrets.USERNAME }}
                 password: ${{ secrets.PASSWORD }}
                 script: |
-                    docker pull ${{ vars.NCP_REGISTRY }}/lion-app:latest
-                    docker-compose -f docker-compose.prod.yml build lion-app02
+                    cd DevOps
+                    docker login
+                    docker pull ${{ vars.NCP_REGISTRY }}/lion-app:1.1
+                    docker-compose -f docker-compose.prod.yml up -d
