@@ -6,7 +6,7 @@ on:
             - 'main'
 
 env:
-    IMAGE_TAG: ${{ vars.NCR_REGISTRY }}/lion-app:latest
+    IMAGE_TAG: ${{ vars.NCP_REGISTRY }}/lion-app:latest
 
 jobs:
     build-and-push:
@@ -19,9 +19,9 @@ jobs:
             - name: Login to NCR
               uses: docker/login-action@v2
               with:
-                registry: ${{ vars.NCR_REGISTRY }}
-                username: ${{ secrets.NCR_ACCESS_KEY_ID }}
-                password: ${{ secrets.NCR_SECRET_KEY }}
+                registry: ${{ vars.NCP_REGISTRY }}
+                username: ${{ secrets.NCP_ACCESS_KEY_ID }}
+                password: ${{ secrets.NCP_SECRET_KEY }}
             - name: Build and Push
               uses: docker/build-push-action@v4
               with:
@@ -44,9 +44,9 @@ jobs:
                 script: |
                     cd lion_django_app
                     docker login \
-                    ${{ vars.NCR_REGISTRY }} \
-                    -u ${{ secrets.NCR_ACCESS_KEY_ID }} \
-                    -p ${{ secrets.NCR_SECRET_KEY }}
+                    ${{ vars.NCP_REGISTRY }} \
+                    -u ${{ secrets.NCP_ACCESS_KEY_ID }} \
+                    -p ${{ secrets.NCP_SECRET_KEY }}
                     docker pull ${{ env.IMAGE_TAG }}
                     # docker-compose -f docker-compose.prod.yml up -d
                     docker stop lion-app && docker rm lion-app
