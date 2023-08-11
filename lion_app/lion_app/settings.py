@@ -35,7 +35,7 @@ ALLOWED_HOSTS = [
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:8888",
-    "lion-lb-18904324-86ca7c2cfe7d.kr.lb.naverncp.com",
+    "http://lion-lb-18904324-86ca7c2cfe7d.kr.lb.naverncp.com",
     #f"http://{LOCAL_IP}:8888",
 ]
 
