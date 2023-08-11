@@ -26,7 +26,7 @@ jobs:
               uses: docker/build-push-action@v4
               with:
                 context: lion_app
-                tags: ${{ env.IMAGE_TAG }}
+                tags: ${{ env.IMAGE_TAG }}, 
                 push: true
 
     deployment:
@@ -48,8 +48,8 @@ jobs:
                     -u ${{ secrets.NCP_ACCESS_KEY_ID }} \
                     -p ${{ secrets.NCP_SECRET_KEY }}
                     docker pull ${{ env.IMAGE_TAG }}
-                    # docker-compose -f docker-compose.prod.yml up -d
-                    # docker stop lion-app && docker rm lion-app
+                    docker-compose -f docker-compose.prod.yml up -d
+                    docker stop lion-app && docker rm lion-app
                     docker run -p 8000:8000 -d \
                     --name lion-app \
                     --env-file .envs/prod/django \

@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 
 services:
   lion-app:
@@ -7,6 +7,7 @@ services:
     ports:
       - 8000:8000
     volumes:
+      # - ~/.aws:/root/.aws:ro
       - "staticfiles:/var/www/html/static"
     command:
       - "/start"
@@ -14,6 +15,8 @@ services:
       - ./.envs/prod/django
       - ./.envs/prod/db
       - ./.envs/prod/server
+    # environment:
+    #   - AWS_SECRET_NAME=like/lion/prod
 
   nginx:
     depends_on:
