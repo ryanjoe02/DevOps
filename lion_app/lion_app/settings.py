@@ -28,8 +28,8 @@ DEBUG = True
 LOCAL_IP = os.getenv('LOCAL_IP', '')
 
 ALLOWED_HOSTS = [
-    "lion-lb-18904324-86ca7c2cfe7d.kr.lb.naverncp.com",
     "localhost",
+    "lion-lb-18904324-86ca7c2cfe7d.kr.lb.naverncp.com",
     #LOCAL_IP,
 ]
 
