@@ -19,8 +19,8 @@ jobs:
                       repo: context.repo.repo,
                       run_id: context.payload.workflow_run.id,
                     });
-                    let matchArtifact = allArtifacts.data.artifacts.filter(artifact => 
-                    artifact.name === "pr_number")[0];
+                    let matchArtifact = allArtifacts.data.artifacts.filter((artifact) => {
+                        return artifact.name == "pr_number"
                     })[0];
                     let download = await github.rest.actions.downloadArtifact({
                         owner: context.repo.owner,
@@ -29,7 +29,7 @@ jobs:
                         archive_format: 'zip',
                     });
                     let fs = require('fs');
-                    let filePath = `${process.env.GITHUB_WORKSPACE}/pr_number.zip`
+                    let filePath = `${process.env.GITHUB_WORKSPACE}/pr_number.zip`;
                     fs.writeFileSync(filePath, Buffer.from(download.data));
 
             - name: 'Unzip artifact'
