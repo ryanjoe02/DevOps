@@ -4,7 +4,7 @@ on:
     workflow_dispatch:
 
 jobs:
-    get-name:
+    get-workflow-name:
         name: echo name
         runs-on: ubuntu-latest
         steps:
@@ -12,4 +12,3 @@ jobs:
     
     call-workflow:
         uses: ./.github/workflows/lesson4.yml
-        
