@@ -4,6 +4,9 @@ on:
     push:
         branches:
             - 'main'
+        path:
+            - .github/workflow/CD.yml
+            - lion_app/**
 
 env:
     IMAGE: ${{ vars.NCP_REGISTRY }}/lion-app
