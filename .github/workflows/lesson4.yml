@@ -1,4 +1,4 @@
-name : reusable workflow
+name: resusable workflow
 
 on:
     workflow_call:
@@ -7,17 +7,16 @@ on:
                 required: true
                 type: string
 
-
 jobs:
     get-workflow-name:
-        name: echo name
+        name: echo workflow name
         runs-on: ubuntu-latest
         steps:
             - run: echo "This workflow is ${{ github.workflow }}"
 
     greeting:
-        name : greeting
+        name: greeting
         runs-on: ubuntu-latest
         steps:
             - name: greeting
-              run: echo "hello, ${{ inputs.person }}"
+              run: echo "Hello, ${{ inputs.person }}"
