@@ -2,6 +2,11 @@ name : reusable workflow
 
 on:
     workflow_call:
+        inputs:
+            person:
+                required: true
+                type: string
+
 
 jobs:
     get-workflow-name:
@@ -15,4 +20,4 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: greeting
-              run: echo "hello, Stranger"
+              run: echo "hello, ${{ inputs.person }}"
