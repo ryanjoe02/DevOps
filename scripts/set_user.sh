@@ -1,7 +1,7 @@
 #!/bin/bash
 
 USERNAME="lion"
-PASSWORD=
+PASSWORD="lion"
 
 # getopts 로 전달 받아서 작업 수행
 while getops "u:p:" opt; do
@@ -28,6 +28,7 @@ fi
 # user 추가
 echo "Add user"
 useradd -s /bin/bash -d /home/$USERNAME -m $USERNAME
+# read -p "What is your name? " name
 
 # password 변경
 echo "Set password"
@@ -35,5 +36,5 @@ echo "$USERNAME:$PASSWORD" | chpasswd
 
 # sudoer에 추가
 echo "Add sudoer"
-echo "$USERNAME ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers.d/$USERNAME
+echo "$USERNAME ALL=(ALL:ALL) ALL" >> /etc/sudoers.d/$USERNAME
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-SERVER_IP=
+SERVER_IP="175.106.97.15"
 
 MANUAL="Usage: $0 [-i server_ip]"
 
