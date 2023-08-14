@@ -16,4 +16,4 @@ jobs:
             matrix:
                 person: ['syjoe', 'joe', 'Joseph']
         with:
-            person: syjoe
+            person: ${{ matrix.person }}
