@@ -1,7 +1,8 @@
 # git clone
 echo "start to clone"
-git clone https://github.com/teacherSsamko/lion_django_app.git lion_django_app
-cd lion_django_app
+cd /home/lion/
+git clone https://github.com/ryanjoe02/DevOps.git
+cd DevOps
 
 # venv 설치
 echo "start to install venv"
@@ -17,4 +18,4 @@ source venv/bin/activate
 
 # pip install
 echo "start to install requirements"
-pip install -r requirements.txt
+pip install -r lion_app/requirements.txt
