@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 
 services:
   lion-app:
@@ -12,6 +12,7 @@ services:
     ports:
       - 8000:8000
     volumes:
+      - ~/.aws:/root/.aws:ro
       - ./lion_app:/app
       - "staticfiles:/var/www/html/static"
     command:
@@ -20,6 +21,8 @@ services:
       - ./.envs/local/django
       - ./.envs/local/db
       - ./.envs/local/server
+    environment:
+      - AWS_SECRET_NAME=like/lion/lecture
 
   nginx:
     restart: always
@@ -38,7 +41,6 @@ services:
       - ./.envs/local/server
 
   db:
-    # postgres
     image: postgres:15
     env_file:
       - ./.envs/local/db

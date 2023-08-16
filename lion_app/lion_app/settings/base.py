@@ -9,12 +9,12 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
-from pathlib import Path
 import os
+from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -29,13 +29,13 @@ LOCAL_IP = os.getenv('LOCAL_IP', '')
 
 ALLOWED_HOSTS = [
     "localhost",
-    "lion-lb-18904324-86ca7c2cfe7d.kr.lb.naverncp.com",
+    "lion-lb-18977364-a2c55cfed774.kr.lb.naverncp.com",
     #LOCAL_IP,
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:8888",
-    #"http://lion-lb-18904324-86ca7c2cfe7d.kr.lb.naverncp.com",
+    #"http://lion-lb-18977364-a2c55cfed774.kr.lb.naverncp.com",
     #f"http://{LOCAL_IP}:8888",
 ]
 
@@ -51,13 +51,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-# Third party Apps
+## Third party Apps
 INSTALLED_APPS += [
     'rest_framework',
     'drf_spectacular',
 ]
 
-# Created Apps
+## Created Apps
 INSTALLED_APPS += [
     'Forum',
 ]
@@ -95,6 +95,8 @@ WSGI_APPLICATION = 'lion_app.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+
+#{"username":"postgres","password":"postgres","engine":"postgres","host":"127.0.0.1","port":"5432","dbname":"postgres"}
 
 DATABASES = {
     'default': {
@@ -152,7 +154,6 @@ STATIC_ROOT = '/var/www/html/static'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# DRF
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
@@ -164,7 +165,7 @@ REST_FRAMEWORK = {
 
 SPECTACULAR_SETTINGS = {
     'TITLE': 'LikeLion Forum API',
-    'DESCRIPTION': 'Likelion 6th',
+    'DESCRIPTION': 'LikeLion 6th',
     'VERSION': '0.0.1',
     'SERVE_INCLUDE_SCHEMA': False,
 }

@@ -15,8 +15,9 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     # drf-spectacular
     path('api/schema/', SpectacularAPIView.as_view(), name='api-schema'),
-    path('api/docs/', 
-        SpectacularSwaggerView.as_view(url_name='api-schema'), 
-        name='api-swappger-ui',
+    path(
+        'api/docs/',
+        SpectacularSwaggerView.as_view(url_name='api-schema'),
+        name='api-swagger-ui',
     ),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
