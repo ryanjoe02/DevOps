@@ -37,7 +37,7 @@ jobs:
                 tags: ${{ env.IMAGE_TAG }},"${{ env.IMAGE }}:${{ steps.timestamp.outputs.timestamp}}"
                 push: true
 
-    deployment:
+    deploy-staging:
         needs: build-and-push
         name: deploy
         runs-on: ubuntu-latest
