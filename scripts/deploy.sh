@@ -17,4 +17,4 @@ source venv/bin/activate
 
 # pip install
 echo "start to install requirements"
-pip install -r requirements.txt
+pip install -r ./lion_app/requirements.txt
