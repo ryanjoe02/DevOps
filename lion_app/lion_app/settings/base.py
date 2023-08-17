@@ -28,15 +28,13 @@ DEBUG = True
 LOCAL_IP = os.getenv("LOCAL_IP", "")
 
 ALLOWED_HOSTS = [
-    "localhost",
     "lion-lb-18977364-a2c55cfed774.kr.lb.naverncp.com",
-    # LOCAL_IP,
+    LOCAL_IP,
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:8888",
     # "http://lion-lb-18977364-a2c55cfed774.kr.lb.naverncp.com",
-    # f"http://{LOCAL_IP}:8888",
+    f"http://{LOCAL_IP}:8888",
 ]
 
 
@@ -104,13 +102,12 @@ DATABASES = {
         "NAME": os.getenv("POSTGRES_DB", "postgres"),
         "USER": os.getenv("POSTGRES_USER", "postgres"),
         "PASSWORD": os.getenv("POSTGRES_PASSWORD", "postgres"),
-        "HOST": os.getenv("DB_HOST"),
+        "HOST": os.getenv("DB_HOST", "db"),
         "OPTIONS": {
             "options": "-c search_path=likelion,public",
         },
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -157,9 +154,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
-    "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly"
-    ],
+    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
