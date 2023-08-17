@@ -24,3 +24,15 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+class TopicGroupUser(models.Model):
+    class groupChoices(models.IntegerChoices):
+        common = 0
+        admin = 1
+    
+    topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
+    group = models.IntegerField(choices=groupChoices.choices)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.topic} | {self.group} | {self.user}"
