@@ -16,7 +16,8 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v3
-            - uses: actions/setup-python@v4
+            - name: setup python
+              uses: actions/setup-python@v4
               with:
                 python-version: '3.11' 
             - name: install black
@@ -25,6 +26,7 @@ jobs:
               run: black --check lion_app
 
     build:
+        needs: lint
         name: Build Image
         runs-on: ubuntu-latest
         steps:
@@ -42,9 +44,28 @@ jobs:
               id: timestamp
               run: echo "timestamp=$(date '+%s')" >> "$GITHUB_OUTPUT"
 
-            - name: Build and Push
-              uses: docker/build-push-action@v4
-              with:
-                context: lion_app
-                tags: ${{ env.IMAGE_TAG }},"${{ env.IMAGE }}:${{ steps.timestamp.outputs.timestamp }}"
-                push: false
+            # - name: Build and Push
+            #   uses: docker/build-push-action@v4
+            #   with:
+            #     context: lion_app
+            #     tags: ${{ env.IMAGE_TAG }},"${{ env.IMAGE }}:${{ steps.timestamp.outputs.timestamp }}"
+            #     push: false
+            #     platforms: linux/amd64, linux/arm64/v8
+            
+            - name: Build
+              run: |
+                 docker build -t test-lion:test lion_app
+            
+            # db: sqlite3
+            - name: Run Test
+              run: |
+                docker run -d -e DJANGO_SETTINGS_MODULE=lion_app.settings.test \
+                --name test \
+                test-lion:test python --version
+                docker exec test ls -l lion_app/settings
+                docker exec test python manage.py test
+
+            - name: post test
+              if: ${{ always() }}
+              run: |
+                docker stop test && docker rm test

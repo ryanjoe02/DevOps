@@ -3,10 +3,10 @@ name: CD using Docker Image
 on:
     push:
         branches:
-            - 'main'
+          - 'main'
         paths:
-            - .github/workflow/CD.yml
-            - lion_app/**
+          - .github/workflows/CD.yml
+          - lion_app/**
 
 env:
     IMAGE: ${{ vars.NCR_REGISTRY }}/lion-app
@@ -26,46 +26,42 @@ jobs:
                 registry: ${{ vars.NCR_REGISTRY }}
                 username: ${{ secrets.NCR_ACCESS_KEY_ID }}
                 password: ${{ secrets.NCR_SECRET_KEY }}
-            
+
             - name: Get current timestamp
               id: timestamp
               run: echo "timestamp=$(date '+%s')" >> "$GITHUB_OUTPUT"
+
             - name: Build and Push
               uses: docker/build-push-action@v4
               with:
                 context: lion_app
-                tags: ${{ env.IMAGE_TAG }},"${{ env.IMAGE }}:${{ steps.timestamp.outputs.timestamp}}"
+                tags: ${{ env.IMAGE_TAG }},"${{ env.IMAGE }}:${{ steps.timestamp.outputs.timestamp }}"
                 push: true
 
     deploy-staging:
         needs: build-and-push
-        name: deploy
+        name: deploy to staging
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v3
             - name: pull and run the image
               uses: appleboy/ssh-action@v1.0.0
               with:
-                host: ${{ secrets.HOST }}
+                host: ${{ secrets.HOST_STAGING }}
                 username: ${{ secrets.USERNAME }}
                 password: ${{ secrets.PASSWORD }}
                 script: |
-                    cd DevOps
                     docker login \
                     ${{ vars.NCR_REGISTRY }} \
                     -u ${{ secrets.NCR_ACCESS_KEY_ID }} \
                     -p ${{ secrets.NCR_SECRET_KEY }}
                     docker pull ${{ env.IMAGE_TAG }}
-                    docker-compose -f docker-compose.prod.yml up -d
-                    docker-compose -f docker-compose.prod.yml stop lion-app
-                    docker docker-compose -f docker-compose.prod.yml rm lion-app
+                    docker stop lion-app && docker rm lion-app
                     docker run -p 8000:8000 -d \
                     --name lion-app \
-                    --env-file .envs/prod/django \
-                    --env-file .envs/prod/db \
-                    --env-file .envs/prod/server \
-                    lion-cr01.kr.ncr.ntruss.com/lion-app:latest \
-                    /start
+                    -v ~/.aws:/root/.aws:ro \
+                    --env-file .env \
+                    lion-cr.kr.ncr.ntruss.com/lion-app:latest
 
-            # - name: echo IMAGE_TAG
-            #   run: echo $IMAGE_TAG
+            - name: echo IMAGE_TAG
+              run: echo $IMAGE_TAG
