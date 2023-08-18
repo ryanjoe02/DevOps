@@ -34,7 +34,8 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
-    
+
+
 class TopicGroupUser(models.Model):
     class GroupChoices(models.IntegerChoices):
         common = 0

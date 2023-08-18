@@ -6,20 +6,38 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('Forum', '0002_alter_post_topic'),
+        ("Forum", "0002_alter_post_topic"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='TopicGroupUser',
+            name="TopicGroupUser",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('group', models.IntegerField(choices=[(0, 'Common'), (1, 'Admin')])),
-                ('topic', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='Forum.topic')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("group", models.IntegerField(choices=[(0, "Common"), (1, "Admin")])),
+                (
+                    "topic",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="Forum.topic"
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]
