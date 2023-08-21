@@ -21,7 +21,7 @@ sudo apt install -y docker.io docker-compose
 echo "Start docker"
 sudo service docker start && sudo service docker enable
 
-echo "Add user to 'docker' group"
+echo "Add user to docker group"
 sudo usermod -aG docker $USERNAME
 
 echo "done"
