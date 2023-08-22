@@ -7,27 +7,19 @@ terraform {
   required_version = ">= 0.13"
 }
 
-// Configure the ncloud provider
-provider "ncloud" {
-  access_key  = var.NCLOUD_ACCESS_KEY
-  secret_key  = var.NCLOUD_SECRET_KEY
-  region      = "KR"
-  site        = "PUBLIC"
-  support_vpc = true
-}
-
-variable "password" {
+variable "NCLOUD_ACCESS_KEY" {
   type = string
 }
 
-variable "NCLOUD_ACCESS_KEY" {
-  type      = string
-  sensitive = true
+variable "NCLOUD_SECRET_KEY" {
+  type = string
 }
 
-variable "NCLOUD_SECRET_KEY" {
-  type      = string
-  sensitive = true
+// Configure the ncloud provider
+provider "ncloud" {
+  region      = "KR"
+  site        = "PUBLIC"
+  support_vpc = true
 }
 
 resource "ncloud_login_key" "loginkey" {
@@ -97,10 +89,21 @@ resource "ncloud_public_ip" "be" {
   server_instance_no = ncloud_server.be.instance_no
 }
 
+variable "username" {
+  type      = string
+  sensitive = true
+}
+
+variable "password" {
+  type      = string
+  sensitive = true
+}
+
 # init script
 resource "ncloud_init_script" "main" {
   name = "set-server-tf"
   content = templatefile("${path.module}/main_init_script.tftpl", {
+    username = var.username
     password = var.password
   })
 }
