@@ -28,13 +28,11 @@ DEBUG = True
 LOCAL_IP = os.getenv("LOCAL_IP", "")
 
 ALLOWED_HOSTS = [
-    "lion-lb-18977364-a2c55cfed774.kr.lb.naverncp.com",
     LOCAL_IP,
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    # "http://lion-lb-18977364-a2c55cfed774.kr.lb.naverncp.com",
-    f"http://{LOCAL_IP}:8888",
+    f"http://{LOCAL_IP}:8000",
 ]
 
 
