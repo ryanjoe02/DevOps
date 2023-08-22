@@ -9,6 +9,8 @@ terraform {
 
 // Configure the ncloud provider
 provider "ncloud" {
+  access_key  = var.NCLOUD_ACCESS_KEY
+  secret_key  = var.NCLOUD_SECRET_KEY
   region      = "KR"
   site        = "PUBLIC"
   support_vpc = true
@@ -16,6 +18,16 @@ provider "ncloud" {
 
 variable "password" {
   type = string
+}
+
+variable "NCLOUD_ACCESS_KEY" {
+  type      = string
+  sensitive = true
+}
+
+variable "NCLOUD_SECRET_KEY" {
+  type      = string
+  sensitive = true
 }
 
 resource "ncloud_login_key" "loginkey" {

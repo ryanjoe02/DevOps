@@ -1,4 +1,5 @@
 # Terraform
+terraform.tfvars
 
 # lock file
 .terraform.lock.hcl
