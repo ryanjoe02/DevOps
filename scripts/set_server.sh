@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 SERVER_IP=
 
 MANUAL="Usage: $0 [-i server_ip]"

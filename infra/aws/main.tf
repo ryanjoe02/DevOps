@@ -54,5 +54,11 @@ resource "aws_iam_user_login_profile" "example" {
 }
 
 output "password" {
-  value = aws_iam_user_login_profile.example.encrypted_password
+  value     = aws_iam_user_login_profile.example.encrypted_password
+  sensitive = true
+}
+
+resource "local_file" "users" {
+  content  = "users"
+  filename = "${path.module}/users.txt"
 }
