@@ -6,6 +6,7 @@ output "db_public_ip" {
   value = ncloud_public_ip.db.public_ip
 }
 
-# output "be_lb_dns" {
-#   value = ncloud_lb.be.domain
-# }
+output "be_instance_no" {
+  value = ncloud_server.be.instance_no
+}
+

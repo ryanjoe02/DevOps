@@ -28,3 +28,11 @@ variable "django_secret_key" {
 variable "django_settings_module" {
   type = string
 }
+
+variable "env" {
+  type = string
+}
+
+variable "vpc_id" {
+  type = string
+}
