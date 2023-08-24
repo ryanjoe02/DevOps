@@ -1,5 +1,7 @@
 # Terraform
 terraform.tfvars
+set_be_server.sh
+set_db_server.sh
 
 # lock file
 .terraform.lock.hcl
