@@ -1,3 +1,3 @@
-output "lb-dns" {
-  value = ncloud_lb.main.domain
+output "lb_dns" {
+  value = ncloud_lb.be.domain
 }

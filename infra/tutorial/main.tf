@@ -8,7 +8,7 @@ terraform {
 }
 
 provider "docker" {
-  
+#    host    = "npipe:////.//pipe//docker_engine" # for windows
 }
 
 resource "docker_image" "nginx" {
@@ -17,12 +17,11 @@ resource "docker_image" "nginx" {
 }
 
 resource "docker_container" "nginx" {
-    image = docker_image.nginx.image_id
-    name = "tutorial"
+  image = docker_image.nginx.image_id
+  name = "tutorial"
 
-    ports {
-        internal = 80
-        external = 8888
-    }
+  ports {
+    internal = 80
+    external = 9000
+  }
 }
-

@@ -1,32 +1,10 @@
-###### be / db 
-variable "password" {
+variable "NCP_ACCESS_KEY" {
+  type = string
+}
+
+variable "NCP_SECRET_KEY" {
   type      = string
   sensitive = true
-}
-
-variable "db" {
-  type = string
-}
-
-variable "db_user" {
-  type = string
-}
-
-variable "db_password" {
-  type = string
-}
-
-variable "db_port" {
-  type    = string
-  default = "5432"
-}
-
-variable "django_secret_key" {
-  type = string
-}
-
-variable "django_settings_module" {
-  type = string
 }
 
 variable "env" {
@@ -34,5 +12,29 @@ variable "env" {
 }
 
 variable "vpc_id" {
+  type = string
+}
+
+variable "subnet_id" {
+  type = string
+}
+
+variable "name" {
+  type = string
+}
+
+variable "init_script_path" {
+  type = string
+}
+
+variable "init_script_envs" {
+  type = map(any)
+}
+
+variable "server_product_code" {
+  type = string
+}
+
+variable "acg_port_range" {
   type = string
 }

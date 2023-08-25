@@ -1,8 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 
 USERNAME="lion"
 PASSWORD="${password}"
-REMOTE_DIRECTORY="/home/lion/"
+REMOTE_DIRECTORY="/home/$USERNAME/"
 
 echo "Add user"
 useradd -s /bin/bash -d $REMOTE_DIRECTORY -m $USERNAME
@@ -21,7 +21,7 @@ sudo apt install -y docker.io docker-compose
 echo "Start docker"
 sudo service docker start && sudo service docker enable
 
-echo "Add user to docker group"
+echo "Add user to 'docker' group"
 sudo usermod -aG docker $USERNAME
 
 ENV_PATH=/home/$USERNAME/.env

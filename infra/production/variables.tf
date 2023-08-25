@@ -1,4 +1,12 @@
-###### be / db 
+variable "NCP_ACCESS_KEY" {
+  type = string
+}
+
+variable "NCP_SECRET_KEY" {
+  type      = string
+  sensitive = true
+}
+
 variable "password" {
   type      = string
   sensitive = true
@@ -13,7 +21,8 @@ variable "db_user" {
 }
 
 variable "db_password" {
-  type = string
+  type      = string
+  sensitive = true
 }
 
 variable "db_port" {
