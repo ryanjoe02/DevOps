@@ -1,4 +1,5 @@
 # Terraform
+.db_envs
 terraform.tfvars
 set_be_server.sh
 set_db_server.sh
