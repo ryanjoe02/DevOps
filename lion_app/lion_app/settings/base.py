@@ -29,6 +29,8 @@ LOCAL_IP = os.getenv("LOCAL_IP", "")
 
 ALLOWED_HOSTS = [
     LOCAL_IP,
+    "*",
+    "localhost",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
@@ -59,6 +61,7 @@ INSTALLED_APPS += [
 ]
 
 MIDDLEWARE = [
+    "common.middleware.HealthcheckMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -101,6 +104,7 @@ DATABASES = {
         "USER": os.getenv("POSTGRES_USER", "postgres"),
         "PASSWORD": os.getenv("POSTGRES_PASSWORD", "postgres"),
         "HOST": os.getenv("DB_HOST", "db"),
+        "PORT": os.getenv("DB_PORT", 5432),
         "OPTIONS": {
             "options": "-c search_path=likelion,public",
         },
