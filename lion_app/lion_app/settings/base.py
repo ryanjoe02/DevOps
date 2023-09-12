@@ -15,6 +15,8 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
+VERSION = "0.1.3"
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -28,13 +30,14 @@ DEBUG = True
 LOCAL_IP = os.getenv("LOCAL_IP", "")
 
 ALLOWED_HOSTS = [
-    LOCAL_IP,
+    # LOCAL_IP,
     "*",
     "localhost",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    f"http://{LOCAL_IP}:8000",
+    "http://localhost:8888",
+    # f"http://{LOCAL_IP}:8000",
 ]
 
 
@@ -101,8 +104,8 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": os.getenv("POSTGRES_DB", "postgres"),
-        "USER": os.getenv("POSTGRES_USER", "postgres"),
-        "PASSWORD": os.getenv("POSTGRES_PASSWORD", "postgres"),
+        "USER": os.getenv("POSTGRES_USER", "user1"),
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD", "user123!@#"),
         "HOST": os.getenv("DB_HOST", "db"),
         "PORT": os.getenv("DB_PORT", 5432),
         "OPTIONS": {
@@ -166,3 +169,6 @@ SPECTACULAR_SETTINGS = {
     "VERSION": "0.0.1",
     "SERVE_INCLUDE_SCHEMA": False,
 }
+
+NCP_ACCESS_KEY = os.getenv("NCP_ACCESS_KEY", "")
+NCP_SECRET_KEY = os.getenv("NCP_SECRET_KEY", "")
