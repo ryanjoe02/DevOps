@@ -3,6 +3,10 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 from blog.urls import router as blog_router
 from Forum.urls import router as forum_router
@@ -24,4 +28,6 @@ urlpatterns = [
     ),
     # prometheus
     path("", include("django_prometheus.urls")),
+    path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

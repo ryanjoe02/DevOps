@@ -57,6 +57,7 @@ INSTALLED_APPS += [
     "rest_framework",
     "drf_spectacular",
     "django_prometheus",
+    # "rest_framework_simplejwt",
 ]
 
 ## Created Apps
@@ -65,6 +66,7 @@ INSTALLED_APPS += [
 ]
 
 MIDDLEWARE = [
+    "django_prometheus.middleware.PrometheusBeforeMiddleware",
     "common.middleware.HealthcheckMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -73,8 +75,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    # prometheus
-    "django_prometheus.middleware.PrometheusBeforeMiddleware",
     "django_prometheus.middleware.PrometheusAfterMiddleware",
 ]
 
@@ -106,12 +106,11 @@ WSGI_APPLICATION = "lion_app.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
+        "ENGINE": "django_prometheus.db.backends.postgresql",
         "NAME": os.getenv("POSTGRES_DB", "postgres"),
         "USER": os.getenv("POSTGRES_USER", "user2"),
         "PASSWORD": os.getenv("POSTGRES_PASSWORD", "user123!@#"),
         "HOST": os.getenv("DB_HOST", "db"),
-        "PORT": os.getenv("DB_PORT", 5432),
         "OPTIONS": {
             "options": "-c search_path=likelion,public",
         },
@@ -165,6 +164,9 @@ REST_FRAMEWORK = {
     # or allow read-only access for unauthenticated users.
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
 }
 
 SPECTACULAR_SETTINGS = {
